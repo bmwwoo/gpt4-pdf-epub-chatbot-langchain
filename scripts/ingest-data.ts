@@ -5,19 +5,21 @@ import { pinecone } from '@/utils/pinecone-client';
 import { CustomPDFLoader } from '@/utils/customPDFLoader';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
+import { EPubLoader } from 'langchain/document_loaders';
 
 /* Name of directory to retrieve your files from */
-const filePath = 'docs';
+const filePath = 'docs/[REPLACE].epub';
 
 export const run = async () => {
   try {
     /*load raw docs from the all files in the directory */
-    const directoryLoader = new DirectoryLoader(filePath, {
-      '.pdf': (path) => new CustomPDFLoader(path),
-    });
+    // const directoryLoader = new DirectoryLoader(filePath, {
+    //   '.pdf': (path) => new CustomPDFLoader(path),
+    // });
 
     // const loader = new PDFLoader(filePath);
-    const rawDocs = await directoryLoader.load();
+    const loader = new EPubLoader(filePath);
+    const rawDocs = await loader.load();
 
     /* Split text into chunks */
     const textSplitter = new RecursiveCharacterTextSplitter({
