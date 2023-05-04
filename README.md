@@ -1,8 +1,8 @@
-# GPT-4 & LangChain - Create a ChatGPT Chatbot for Your PDF Files
+# GPT-4 & LangChain - Create a ChatGPT Chatbot for Your PDF and EPUB Files
 
-Use the new GPT-4 api to build a chatGPT chatbot for multiple Large PDF files.
+Use the new GPT-4 api to build a chatGPT chatbot for multiple Large PDF and EPUB files.
 
-Tech stack used includes LangChain, Pinecone, Typescript, Openai, and Next.js. LangChain is a framework that makes it easier to build scalable AI/LLM apps and chatbots. Pinecone is a vectorstore for storing embeddings and your PDF in text to later retrieve similar docs.
+Tech stack used includes LangChain, Pinecone, Typescript, Openai, and Next.js. LangChain is a framework that makes it easier to build scalable AI/LLM apps and chatbots. Pinecone is a vectorstore for storing embeddings and your PDF and EPUB in text to later retrieve similar docs.
 
 [Tutorial video](https://www.youtube.com/watch?v=ih9PBGVVOO4)
 
@@ -22,7 +22,6 @@ Prelude: Please make sure you have already downloaded node on your system and th
 git clone [github https url]
 ```
 
-
 2. Install packages
 
 First run `npm install yarn -g` to install yarn globally (if you haven't already).
@@ -32,6 +31,7 @@ Then run:
 ```
 yarn install
 ```
+
 After installation, you should now see a `node_modules` folder.
 
 3. Set up your `.env` file
@@ -56,11 +56,11 @@ PINECONE_INDEX_NAME=
 
 5. In `utils/makechain.ts` chain change the `QA_PROMPT` for your own usecase. Change `modelName` in `new OpenAI` to `gpt-4`, if you have access to `gpt-4` api. Please verify outside this repo that you have access to `gpt-4` api, otherwise the application will not work.
 
-## Convert your PDF files to embeddings
+## Convert your PDF and EPUB files to embeddings
 
-**This repo can load multiple PDF files**
+**This repo can load multiple PDF and EPUB files**
 
-1. Inside `docs` folder, add your pdf files or folders that contain pdf files.
+1. Inside `docs` folder, add your pdf and epub files or folders that contain pdf and epub files.
 
 2. Run the script `npm run ingest` to 'ingest' and embed your docs. If you run into errors troubleshoot below.
 
@@ -77,7 +77,7 @@ In general, keep an eye out in the `issues` and `discussions` section of this re
 **General errors**
 
 - Make sure you're running the latest Node version. Run `node -v`
-- Try a different PDF or convert your PDF to text first. It's possible your PDF is corrupted, scanned, or requires OCR to convert to text.
+- Try a different PDF or EPUB or convert your PDF or EPUB to text first. It's possible your PDF or EPUB is corrupted, scanned, or requires OCR to convert to text.
 - `Console.log` the `env` variables and make sure they are exposed.
 - Make sure you're using the same versions of LangChain and Pinecone as this repo.
 - Check that you've created an `.env` file that contains your valid (and working) API keys, environment and index name.
