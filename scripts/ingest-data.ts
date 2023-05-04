@@ -2,24 +2,27 @@ import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai';
 import { PineconeStore } from 'langchain/vectorstores/pinecone';
 import { pinecone } from '@/utils/pinecone-client';
-import { CustomPDFLoader } from '@/utils/customPDFLoader';
+import { CustomPDFLoader, CustomEPUBLoader } from '@/utils/customDocLoader';
 import { PINECONE_INDEX_NAME, PINECONE_NAME_SPACE } from '@/config/pinecone';
 import { DirectoryLoader } from 'langchain/document_loaders/fs/directory';
-import { EPubLoader } from 'langchain/document_loaders';
 
 /* Name of directory to retrieve your files from */
-const filePath = 'docs/[REPLACE].epub';
+const filePath = 'docs';
 
 export const run = async () => {
   try {
     /*load raw docs from the all files in the directory */
-    // const directoryLoader = new DirectoryLoader(filePath, {
-    //   '.pdf': (path) => new CustomPDFLoader(path),
-    // });
+    /* TODO: somehow it's either only ingesting one file or it's only querying one file */
+    const pdfDirectoryLoader = new DirectoryLoader(filePath, {
+      '.pdf': (path) => new CustomPDFLoader(path),
+    });
+    const epubDirectoryLoader = new DirectoryLoader(filePath, {
+      '.epub': (path) => new CustomEPUBLoader(path),
+    });
 
-    // const loader = new PDFLoader(filePath);
-    const loader = new EPubLoader(filePath);
-    const rawDocs = await loader.load();
+    const rawPdfDocs = await pdfDirectoryLoader.load();
+    const rawEpubDocs = await epubDirectoryLoader.load();
+    const rawDocs = [...rawPdfDocs, ...rawEpubDocs];
 
     /* Split text into chunks */
     const textSplitter = new RecursiveCharacterTextSplitter({

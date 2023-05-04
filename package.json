@@ -20,6 +20,7 @@
     "@radix-ui/react-accordion": "^1.1.1",
     "clsx": "^1.2.1",
     "dotenv": "^16.0.3",
+    "epub": "^1.2.1",
     "epub2": "^3.0.1",
     "html-to-text": "^9.0.5",
     "langchain": "^0.0.68",
@@ -32,6 +33,7 @@
     "tailwind-merge": "^1.10.0"
   },
   "devDependencies": {
+    "@types/jsdom": "^21.1.1",
     "@types/node": "^18.14.6",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
@@ -39,6 +41,7 @@
     "autoprefixer": "^10.4.13",
     "eslint": "8.35.0",
     "eslint-config-next": "13.2.3",
+    "jsdom": "^22.0.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
     "tailwindcss": "^3.2.7",
